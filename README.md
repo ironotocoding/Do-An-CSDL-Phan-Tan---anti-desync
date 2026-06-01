@@ -32,17 +32,14 @@ pip install flask requests
 ├── sync_check.py        # Hacker Mode: tấn công + mô phỏng phát hiện tự động
 ├── find_culprit.py      # Reconciliation Tool: Majority Voting + tìm giao dịch lậu
 ├── README.md
-└── deliverables/
-    ├── 01_Project_Proposal.docx
-    ├── 02_Design_Document.docx
-    └── 03_Analysis_Report_v2.docx
+
 ```
 
 > **Lưu ý:** Các file `site*.db` được tạo tự động khi chạy `init_db.py`, không có trong repo.
 
 ---
 
-## Hướng dẫn Demo (Kịch bản bảo vệ đồ án)
+## Hướng dẫn Demo 
 
 ### Bước 1 — Khởi tạo (chạy 1 lần đầu)
 ```bash
