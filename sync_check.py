@@ -10,7 +10,7 @@ def reset_transactions():
     conn.close()
 
 def simulate_distributed_network():
-    print("=== BƯỚC 1: KHỞI TẠO MẠNG LƯỚI PHÂN TÁN (3 SITES) ===")
+    print("          BƯỚC 1: KHỞI TẠO MẠNG LƯỚI PHÂN TÁN (3 SITES)")
     # Xóa sạch giao dịch cũ để đảm bảo bắt đầu từ trạng thái sạch
     reset_transactions()
     # Copy file database của Site 1 ra làm 2 bản để tạo Site 2 và Site 3
@@ -18,15 +18,15 @@ def simulate_distributed_network():
     shutil.copyfile('site1_database.db', 'site3_database.db')
     print("Đã tạo xong Site 2 và Site 3. Lúc này cả 3 máy giống hệt nhau.\n")
 
-    print("=== BƯỚC 2: CÔNG CỤ RECONCILIATION KIỂM TRA ĐỒNG BỘ ===")
+    print("          BƯỚC 2: CÔNG CỤ RECONCILIATION KIỂM TRA ĐỒNG BỘ")
     hash1 = generate_hash('site1_database.db')
     hash2 = generate_hash('site2_database.db')
     hash3 = generate_hash('site3_database.db')
     
     if hash1 == hash2 == hash3:
-        print("-> TRẠNG THÁI ỔN ĐỊNH: Dữ liệu cả 3 Site hoàn toàn đồng bộ!\n")
+        print(" TRẠNG THÁI ỔN ĐỊNH: Dữ liệu cả 3 Site hoàn toàn đồng bộ!\n")
     
-    print("=== BƯỚC 3: HACKER MODE (TẠO LỖI DESYNC) ===")
+    print("          BƯỚC 3: HACKER MODE (TẠO LỖI DESYNC)")
     print("[Hacker đang chọn mục tiêu tấn công...]\n")
 
     # Chọn site (1/2/3 là giới hạn kỹ thuật, không phải rule nghiệp vụ)
@@ -58,7 +58,7 @@ def simulate_distributed_network():
     print()
 
     
-    print("=== BƯỚC 4: HỆ THỐNG TỰ ĐỘNG PHÁT HIỆN SAI LỆCH ===")
+    print("          BƯỚC 4: HỆ THỐNG TỰ ĐỘNG PHÁT HIỆN SAI LỆCH")
     print("[Hệ thống dùng Lazy Replication: Đang chờ chu kỳ quét tự động 10 phút...]")
     import time
     for i in range(5, 0, -1):
@@ -75,7 +75,7 @@ def simulate_distributed_network():
     if new_hash1 == new_hash2 == new_hash3:
         print("-> TRẠNG THÁI: Đồng bộ — Cả 3 site khớp nhau hoàn toàn.")
     else:
-        print("-> 🚨 CẢNH BÁO BẢO MẬT: ĐÃ PHÁT HIỆN SAI LỆCH DỮ LIỆU (STATE DIVERGENCE)!")
+        print("->  CẢNH BÁO BẢO MẬT: ĐÃ PHÁT HIỆN SAI LỆCH DỮ LIỆU (STATE DIVERGENCE)!")
 
 if __name__ == "__main__":
     simulate_distributed_network()  

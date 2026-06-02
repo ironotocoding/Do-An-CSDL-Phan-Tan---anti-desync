@@ -16,7 +16,7 @@ def get_transactions(db_name):
     return rows
 
 def find_culprit():
-    print("=== RECONCILIATION TOOL: TỰ ĐỘNG TÌM SITE BỊ TẤN CÔNG ===\n")
+    print("        RECONCILIATION TOOL: TỰ ĐỘNG TÌM SITE BỊ TẤN CÔNG\n")
 
     # Bước 1: Tính hash-chain của cả 3 site
     hashes = {sid: generate_hash(db) for sid, db in SITES.items()}
@@ -41,12 +41,12 @@ def find_culprit():
         # Kiểm tra nếu cả 3 đều giống nhau
         all_h = list(hashes.values())
         if all_h[0] == all_h[1] == all_h[2]:
-            print("\n✅ Tất cả 3 site đồng bộ hoàn toàn. Không có sai lệch.")
+            print("\n Tất cả 3 site đồng bộ hoàn toàn. Không có sai lệch.")
         else:
-            print("\n⚠️  Không xác định được rõ ràng site nào bị hack (có thể nhiều site bị tấn công).")
+            print("\n  Không xác định được rõ ràng site nào bị hack (có thể nhiều site bị tấn công).")
         return
 
-    print(f"\n🚨 PHÁT HIỆN: Site {hacked_site} bị tấn công! (hash khác với Site {clean_site})\n")
+    print(f"\n PHÁT HIỆN: Site {hacked_site} bị tấn công! (hash khác với Site {clean_site})\n")
 
     # Bước 3: So sánh giao dịch để tìm thủ phạm
     good_txs   = get_transactions(SITES[clean_site])
@@ -58,11 +58,11 @@ def find_culprit():
     differences = [tx for tx in hacked_txs if tx not in good_txs]
 
     if differences:
-        print("\n🎯 GIAO DỊCH GÂY RA SAI LỆCH (STATE DIVERGENCE):")
+        print("\n GIAO DỊCH GÂY RA SAI LỆCH (STATE DIVERGENCE):")
         for diff in differences:
             print(f"   -> ID: {diff[0]} | Sản phẩm ID: {diff[1]} | Hành động: {diff[2]} | Số lượng: {diff[3]} | Thời gian: {diff[4]}")
     else:
-        print("\n⚠️  Không tìm thấy giao dịch lạ (site bị hack có ÍT giao dịch hơn site sạch).")
+        print("\n  Không tìm thấy giao dịch lạ (site bị hack có ÍT giao dịch hơn site sạch).")
 
 if __name__ == "__main__":
     find_culprit()
