@@ -45,7 +45,7 @@ pip install flask requests
 ├── start_all.py         # Khởi động đồng loạt 3 nodes (port 5001, 5002, 5003)
 ├── sync_check.py        # Hacker Mode: tấn công + mô phỏng phát hiện tự động
 ├── find_culprit.py      # Reconciliation Tool: Majority Voting + tìm giao dịch lậu
-├── README.md
+└── README.md
 
 ```
 

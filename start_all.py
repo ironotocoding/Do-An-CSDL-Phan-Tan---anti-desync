@@ -6,8 +6,9 @@ import subprocess
 import sys
 import time
 
-# Cấu hình: (cổng, tên file database)
+
 NODES = [
+    
     (5001, 'site1_database.db'),
     (5002, 'site2_database.db'),
     (5003, 'site3_database.db'),
@@ -15,11 +16,11 @@ NODES = [
 
 processes = []
 
-print("         KHỞI ĐỘNG HỆ THỐNG PHÂN TÁN ")
+print("          KHỞI ĐỘNG HỆ THỐNG PHÂN TÁN")
 for port, db in NODES:
     p = subprocess.Popen([sys.executable, 'app.py', str(port), db])     
     processes.append(p)
-    print(f"   Node tại Port {port} (DB: {db}) đã khởi động.")
+    print(f"  -> Node tại Port {port} (DB: {db}) đã khởi động.")
     time.sleep(0.5)  # Chờ nhẹ để tránh xung đột
 
 print("\nTất cả 3 nodes đang chạy!")    
