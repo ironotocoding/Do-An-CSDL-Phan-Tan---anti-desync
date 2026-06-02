@@ -13,6 +13,20 @@ Hệ thống mô phỏng một cơ sở dữ liệu phân tán với **3 replica
 
 ---
 
+## Lý do thực hiện đồ án & Vấn đề giải quyết
+
+Trong các hệ thống phân tán thực tế (như ngân hàng, chuỗi cung ứng) sử dụng kiến trúc **Full Replication**, dữ liệu được nhân bản ở nhiều máy chủ khác nhau để dự phòng rủi ro. 
+Tuy nhiên, điều này đặt ra một bài toán bảo mật lớn (Byzantine Fault): **Làm sao để hệ thống biết chắc chắn dữ liệu ở tất cả các máy chủ đều giống hệt nhau?** 
+
+Nếu một hacker hoặc quản trị viên biến chất bí mật chỉnh sửa số liệu thẳng trên ổ cứng của **một** máy chủ vật lý, hệ thống sẽ bị rẽ nhánh dữ liệu (State Divergence). Các lớp bảo mật vòng ngoài (như Tường lửa, Phân quyền API) sẽ hoàn toàn vô dụng vì hacker thao tác trực tiếp ở tầng Storage.
+
+**Đồ án này ra đời để giải quyết triệt để bài toán đó bằng 3 cốt lõi:**
+1. **Kiểm toán từ bên trong (Hash-Chain):** Băm toàn bộ lịch sử giao dịch thành chuỗi liên kết. Nếu ổ cứng bị sửa dù chỉ 1 ký tự, toàn bộ chuỗi băm sẽ sai lệch.
+2. **Tự động hóa & Phi tập trung (Decentralized):** Không cần con người, các máy chủ tự động kiểm tra chéo lẫn nhau định kỳ mỗi 10 phút.
+3. **Phân xử bằng đồng thuận (Majority Voting):** Dùng nguyên lý Bỏ phiếu đa số để tự động cô lập máy bị hack và trích xuất chính xác giao dịch giả mạo.
+
+---
+
 ## Cài đặt
 
 ```bash
